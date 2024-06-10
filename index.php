@@ -20,21 +20,31 @@
                 </li>
             </ul>
             <ul>
-                
-                <li>
-                    <input type="search" name="search" placeholder="search..." hx-get="/search/" hx-trigger="load, input changed, search" hx-target="#search-results" hx-indicator="loading"> 
-                </li>
+                <li><a href="index.php?value=1">Add Phone</a></li>
+                <?php
+                if (!isset($_GET["Value"])) {
+                    echo '<li>
+                    <input type="search" name="search" placeholder="search..." hx-get="./search/" hx-trigger="load, input changed, search" hx-target="#search-results" hx-indicator="loading"> 
+                    </li>';
+                }
+                ?>
             </ul>
         </nav>
     </header>
-
     <main class="container">
-        <h1>Results: <?php echo $_GET["search"] ?? "" ?></h1>
-
-        <section id="search-results"></div>
+<?php
+$choice=0;
+if (isset($_GET["value"])) {
+ $choice=$_GET["value"];
+}
+$return_value = match ($choice) {
+    1 => include "add.php",
+    default => include "search.php",
+};
+var_dump($return_value);
+?>
+</main>
         
-        <div aria-busy="true" id="loading" class="htmx-indicator"></div>
-    </main>
 </body>
 
 </html>
