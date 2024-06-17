@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <meta http-equiv="Pragma" content="no-cache">
+    <meta name="viewport" content="width=device-width no-cache">
+    <meta http-equiv="Pragma" content="">
     <title>Shop</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2.0.6/css/pico.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2.0.6/css/pico.colors.min.css" />
@@ -20,7 +20,7 @@
             <ul>
             <li>
             <li><img src="Logo.png" alt="" style="height:3.5rem"></li>
-                <h1 class=""><b>Telekommunikationsgeräteverkauf</b></h1>
+                <h1 class=""><a href="index.php"><b>Telekommunikationsgeräteverkauf</b></a></h1>
                 </li>
             </ul>
             <ul>
