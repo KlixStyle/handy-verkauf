@@ -3,7 +3,6 @@ $ENV = parse_ini_file(".env");
 $database = new mysqli($ENV["CONNECTION"], $ENV["USER"], $ENV["PASSWORD"], $ENV["DATABASE"]);
 $con = mysqli_connect($ENV["CONNECTION"], $ENV["USER"], $ENV["PASSWORD"]);
 $db = mysqli_select_db($con, $ENV["DATABASE"]);
-
 $search = $_GET["search"] ?? "";
 $phones = $database->query("SELECT
     " . $ENV["TABLE_MODELS"] . ".modelname,
@@ -18,7 +17,18 @@ FROM
 INNER JOIN " . $ENV["TABLE_MANUFACTURER"] . " ON
     " . $ENV["TABLE_MODELS"] . ".hersteller_id = " . $ENV["TABLE_MANUFACTURER"] . ".id
 WHERE
-    modelname LIKE '$search%';")->fetch_all(); ?>
+    modelname LIKE '$search%';")->fetch_all();
+    $temp = 0;
+    foreach ($phones as $phone) {
+    $_sold = mysqli_query($con,"select COUNT(*) from " . $ENV["TABLE_SOLD"] . " WHERE model_id = ".$phone[5].";");
+                        $soldnum = mysqli_fetch_array($_sold);
+                        $phones[$temp][7]=$soldnum[0];
+                        $temp +=1; 
+    }
+    usort($phones, function ($a, $b) {
+        return $b[7] - $a[7];
+    });
+?>
 <div class="flex flex-wrap justify-center gap-y-1 gap-x-1">
     <?php foreach ($phones as $phone) {
         if (!$phone[6]) { ?>
@@ -38,7 +48,8 @@ WHERE
                     <button class="p-1" style="width:100%;font-size:0.85rem" type="submit">Verkaufen</button>
                 </form>
                 <form method="post" class="pr-1 pl-1" style="width:100%">
-                    <button class="p-1" style="width:100%;font-size:0.85rem" type="submit">Ändern</button>
+                    <input type="hidden" name="change" value="<?php echo $phone[5] ?>">
+                    <button class="p-1" style="width:100%;font-size:0.85rem" type="submit">Ändern WIP</button> 
                 </form>
             </div>
         </div>
