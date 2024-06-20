@@ -8,14 +8,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         mysqli_query($database, "insert into " . $ENV["TABLE_SOLD"] . "(model_id, date) VALUES ($_sell, current_timestamp())");
         mysqli_query($database, "update ".$ENV["TABLE_MODELS"]." set bestand = (bestand - 1) WHERE id = $_sell");
     }
-} ?>
+}
+$choice=0;
+                if (isset($_GET["value"])) {
+                 $choice=$_GET["value"];
+                }
+?>   
 <!DOCTYPE html>
 <html data-theme="light">
 
 <head>
 <?php if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["sell"])) {
-        echo '<meta http-equiv="refresh" content=0; URL="/index.php">';}}?>
+        echo '<meta http-equiv="refresh" content=0; URL="index.php?value=1">';}}?>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width no-cache">
     <meta http-equiv="Pragma" content="">
@@ -38,27 +43,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </ul>
             <ul>
                 <?php
-                $choice=0;
-                if (isset($_GET["value"])) {
-                 $choice=$_GET["value"];
-                }
-                if ($choice != 0) {echo '<li><a href="index.php"><kbd>Sell</kbd></a></li>';}
-                if ($choice != 1) {echo '<li><a href="index.php?value=1"><kbd>Add Phone</kbd></a></li>';}
-                if ($choice == 0) {echo ('<ul><li><input type="search" name="search" placeholder="search..." hx-get="./search/" hx-trigger="load, input changed, search" hx-target="#search-results" hx-indicator="loading"></li></ul>');}
+                if ($choice != 0) {echo '<li><a href="index.php"><kbd>Verkaufen</kbd></a></li>';}
+                if ($choice != 1) {echo '<li><a href="index.php?value=1"><kbd>Handy Hinzufügen</kbd></a></li>';}
+                if ($choice == 0) {echo ('<li><input type="search" name="search" placeholder="search..." hx-get="./search/" hx-trigger="load, input changed, search" hx-target="#search-results" hx-indicator="loading"></li>');}
                 ?>
             </ul>
         </nav>
     </header>
     <main class="container-fluid">
 <?php
-$choice=0;
-if (isset($_GET["value"])) {
- $choice=$_GET["value"];
-}
 switch ($choice) {
-    case 0: include "search/search.php"; break 1;
     case 1: include "add.php"; break 1;
 }
+include "search/search.php";
 ?>
 </main>
         

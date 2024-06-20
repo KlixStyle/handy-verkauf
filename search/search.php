@@ -53,15 +53,26 @@ WHERE
                     <small style="font-size:75%;margin:0;padding-top:0;"><b><?php echo $phone[1] ?>€</b></small>
                 </div>
             </div>
-            <div role="group" class="gap-x-1 pt-0.5" style="margin-bottom:-0.75rem;margin-top:0.25rem">
-                <form method="post" class="pl-1 pr-1" style="width:100%">
-                    <input type="hidden" name="sell" value="<?php echo $phone[5] ?>">
-                    <button class="p-1" style="width:100%;font-size:0.85rem" type="submit">Verkaufen</button>
-                </form>
-                <form method="post" class="pr-1 pl-1" style="width:100%">
-                    <input type="hidden" name="change" value="<?php echo $phone[5] ?>">
-                    <button class="p-1" style="width:100%;font-size:0.85rem" type="submit">Ändern WIP</button> 
-                </form>
+            <div role="group" class="gap-x-1 pt-0.5" style="margin-bottom:<?php 
+                $choice=0;
+                if (isset($_GET["value"])) {
+                 $choice=$_GET["value"];
+                }
+                switch ($choice) {
+                    case 0: echo '-0.75rem";margin-top:0.25rem";> ';break 1;
+                    case 1: echo '0.25rem";margin-top:0.25rem";> ';break 1;}?>
+                <?php
+                    $choice=0;
+                    if (isset($_GET["value"])) {
+                     $choice=$_GET["value"];
+                    } 
+                switch ($choice) {
+                    case 1: echo '<a class="pl-1 pr-1" href="index.php?value=1&change='.$phone[5].'"><button class="p-1" style="width:100%;font-size:0.85rem">Ändern</button></a> 
+                    <a class="pl-1 pr-1" href="index.php?value=1&del='.$phone[5].'"><button class="p-1" style="width:100%;font-size:0.85rem">Löschen</button></a> ';break 1;
+                case 0: echo '<form method="post" class="pl-1 pr-1" style="width:100%">
+                    <input type="hidden" name="sell" value="'.$phone[5].'">
+                   <button class="p-1" style="width:100%;font-size:0.85rem" type="submit">Verkaufen</button></a>
+                </form>';break 1; }?>
             </div>
         </div>
 
