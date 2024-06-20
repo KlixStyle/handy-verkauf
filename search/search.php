@@ -38,11 +38,22 @@ WHERE
                 <h3 style="text-align:center"><?php echo $phone[0] ?></h3>
                 <p style="text-align:center"><?php echo $phone[2] ?> GB</p>
             </hgroup>
-            <div class="grid" style="width:95%;margin:auto;margin-bottom:2.5%;">
-                <div class="pico-background-grey-150" style="text-align:center;border-radius:7px"><small style="font-size:75%"><?php echo $phone[3] ?> Stk.</small></div>
-                <div class="pico-background-grey-150" style="text-align:center;border-radius:7px"><small style="font-size:75%"><b><?php echo $phone[1] ?>€</b></small></div>
+            <div class="grid" style="width:95%;margin:auto;">
+                <div class="pico-background-grey-150" style="text-align:center;border-radius:7px">
+                    <p style="font-size:50%;text-align:center;margin-bottom:0;padding-top:5%;">Bestand:</p>
+                    <small style="font-size:75%;margin:0;padding-top:0;"><?php echo $phone[3] ?> Stk.</small>
+                </div>
+                <div class="pico-background-grey-150" style="text-align:center;border-radius:7px">
+                    <p style="font-size:50%;text-align:center;margin-bottom:0;padding-top:5%;">Verkauft:</p>
+                    <small style="font-size:75%;margin:0;padding-top:0;">
+                    <?php echo $phone[7] ?> Stk.</small>
+                </div>
+                <div class="pico-background-grey-150" style="text-align:center;border-radius:7px">
+                    <p style="font-size:50%;text-align:center;margin-bottom:0;padding-top:5%;">Preis:</p>
+                    <small style="font-size:75%;margin:0;padding-top:0;"><b><?php echo $phone[1] ?>€</b></small>
+                </div>
             </div>
-            <div role="group" class="gap-x-1 pt-0.5" style="margin-bottom:0rem">
+            <div role="group" class="gap-x-1 pt-0.5" style="margin-bottom:-0.75rem;margin-top:0.25rem">
                 <form method="post" class="pl-1 pr-1" style="width:100%">
                     <input type="hidden" name="sell" value="<?php echo $phone[5] ?>">
                     <button class="p-1" style="width:100%;font-size:0.85rem" type="submit">Verkaufen</button>

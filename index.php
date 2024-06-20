@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <nav class="flex flex-nowrap justify-between gap-x-1">
             <ul>
             <li>
-            <li><img src="Logo.png" alt="" style="height:3.5rem"></li>
+            <li><img src="Logo.png" alt="" style="height:3.5rem;min-width:3.5rem"></li>
                 <h1 style="font-size:1rem" class=""><a href="index.php"><b>Telekommunikationsgeräteverkauf</b></a></h1>
                 </li>
             </ul>
@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
                 if ($choice != 0) {echo '<li><a href="index.php"><kbd>Sell</kbd></a></li>';}
                 if ($choice != 1) {echo '<li><a href="index.php?value=1"><kbd>Add Phone</kbd></a></li>';}
-                if ($choice == 0) {echo '<li><input type="search" name="search" placeholder="search..." hx-get="./search/" hx-trigger="load, input changed, search" hx-target="#search-results" hx-indicator="loading"></li>';}
+                if ($choice == 0) {echo ('<ul><li><input type="search" name="search" placeholder="search..." hx-get="./search/" hx-trigger="load, input changed, search" hx-target="#search-results" hx-indicator="loading"></li></ul>');}
                 ?>
             </ul>
         </nav>
