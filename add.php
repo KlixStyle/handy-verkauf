@@ -1,5 +1,5 @@
 <?php
-$ENV = parse_ini_file("search/.env");
+$ENV = parse_ini_file(".env");
 $con = mysqli_connect($ENV["CONNECTION"], $ENV["USER"], $ENV["PASSWORD"]);
 $db = mysqli_select_db($con, $ENV["DATABASE"]);
 $database = new mysqli($ENV["CONNECTION"], $ENV["USER"], $ENV["PASSWORD"], $ENV["DATABASE"]);

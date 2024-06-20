@@ -1,5 +1,5 @@
 <?php 
-$ENV = parse_ini_file("search/.env");
+$ENV = parse_ini_file(".env");
 $database = new mysqli($ENV["CONNECTION"], $ENV["USER"], $ENV["PASSWORD"], $ENV["DATABASE"]);
 $con = mysqli_connect($ENV["CONNECTION"], $ENV["USER"], $ENV["PASSWORD"]);
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

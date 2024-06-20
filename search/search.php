@@ -1,5 +1,5 @@
 <?php
-$ENV = parse_ini_file(".env");
+$ENV = parse_ini_file("./.env");
 $database = new mysqli($ENV["CONNECTION"], $ENV["USER"], $ENV["PASSWORD"], $ENV["DATABASE"]);
 $con = mysqli_connect($ENV["CONNECTION"], $ENV["USER"], $ENV["PASSWORD"]);
 $db = mysqli_select_db($con, $ENV["DATABASE"]);
@@ -53,7 +53,7 @@ WHERE
                     <small style="font-size:75%;margin:0;padding-top:0;"><b><?php echo $phone[1] ?>€</b></small>
                 </div>
             </div>
-            <div role="group" class="gap-x-1 pt-0.5" style="margin-bottom:<?php 
+            <div role="group" class="gap-x-1 pt-2" style="margin-bottom:<?php 
                 $choice=0;
                 if (isset($_GET["value"])) {
                  $choice=$_GET["value"];
