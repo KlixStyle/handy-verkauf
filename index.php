@@ -1,8 +1,21 @@
-
+<?php 
+$ENV = parse_ini_file("search/.env");
+$database = new mysqli($ENV["CONNECTION"], $ENV["USER"], $ENV["PASSWORD"], $ENV["DATABASE"]);
+$con = mysqli_connect($ENV["CONNECTION"], $ENV["USER"], $ENV["PASSWORD"]);
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST["sell"])) {
+        $_sell = $_POST["sell"];
+        mysqli_query($database, "insert into " . $ENV["TABLE_SOLD"] . "(model_id, date) VALUES ($_sell, current_timestamp())");
+        mysqli_query($database, "update ".$ENV["TABLE_MODELS"]." set bestand = (bestand - 1) WHERE id = $_sell");
+    }
+} ?>
 <!DOCTYPE html>
 <html data-theme="light">
 
 <head>
+<?php if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST["sell"])) {
+        echo '<meta http-equiv="refresh" content=0; URL="/index.php">';}}?>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width no-cache">
     <meta http-equiv="Pragma" content="">
@@ -16,11 +29,11 @@
 
 <body>
     <header class="container">
-        <nav>
+        <nav class="flex flex-nowrap justify-between gap-x-1">
             <ul>
             <li>
             <li><img src="Logo.png" alt="" style="height:3.5rem"></li>
-                <h1 class=""><a href="index.php"><b>Telekommunikationsgeräteverkauf</b></a></h1>
+                <h1 style="font-size:1rem" class=""><a href="index.php"><b>Telekommunikationsgeräteverkauf</b></a></h1>
                 </li>
             </ul>
             <ul>
@@ -43,7 +56,7 @@ if (isset($_GET["value"])) {
  $choice=$_GET["value"];
 }
 switch ($choice) {
-    case 0: include "search.php"; break 1;
+    case 0: include "search/search.php"; break 1;
     case 1: include "add.php"; break 1;
 }
 ?>
